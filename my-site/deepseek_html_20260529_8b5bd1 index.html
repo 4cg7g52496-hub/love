@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>С первой годовщиной, Любимка ❤️</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            min-height: 100vh;
+            background: linear-gradient(145deg, #ff9a9e 0%, #fad0c4 50%, #fad0c4 100%);
+            font-family: 'Segoe UI', 'Poppins', system-ui, -apple-system, 'Montserrat', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 2rem 1.5rem;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        .heart-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+            overflow: hidden;
+        }
+
+        .floating-heart {
+            position: absolute;
+            font-size: 1.5rem;
+            opacity: 0.3;
+            animation: floatHeart 12s infinite ease-in-out;
+            user-select: none;
+            color: #ff3366;
+        }
+
+        @keyframes floatHeart {
+            0% {
+                transform: translateY(100vh) scale(0.6) rotate(0deg);
+                opacity: 0;
+            }
+            20% {
+                opacity: 0.4;
+            }
+            80% {
+                opacity: 0.3;
+            }
+            100% {
+                transform: translateY(-20vh) scale(1.2) rotate(20deg);
+                opacity: 0;
+            }
+        }
+
+        .card {
+            position: relative;
+            z-index: 10;
+            max-width: 600px;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.92);
+            backdrop-filter: blur(2px);
+            border-radius: 60px 30px 60px 30px;
+            box-shadow: 0 25px 45px rgba(0, 0, 0, 0.2), 0 0 0 1px rgba(255, 255, 255, 0.6);
+            padding: 2rem 1.8rem 2.5rem;
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+
+        h1 {
+            font-size: 2rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #c0392b, #e74c3c, #ff6b6b);
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+            margin-bottom: 0.5rem;
+            letter-spacing: -0.5px;
+            animation: fadeSlideUp 0.8s ease-out;
+        }
+
+        .sub {
+            font-size: 1.2rem;
+            color: #b94b3c;
+            font-weight: 500;
+            margin-bottom: 2rem;
+            border-bottom: 2px dotted #ffaaa5;
+            display: inline-block;
+            padding-bottom: 5px;
+            animation: fadeSlideUp 0.8s 0.1s backwards;
+        }
+
+        @keyframes fadeSlideUp {
+            from {
+                opacity: 0;
+                transform: translateY(25px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .quiz-area {
+            background: #fff0ed;
+            border-radius: 48px;
+            padding: 1.5rem 1.2rem;
+            margin: 1.5rem 0;
+            box-shadow: inset 0 1px 3px #0001, 0 10px 20px -5px rgba(0,0,0,0.1);
+        }
+
+        .question {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #a53122;
+            margin-bottom: 1.2rem;
+            word-break: break-word;
+        }
+
+        .options {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 1rem;
+            margin: 1rem 0 0.5rem;
+        }
+
+        .option-btn {
+            background: white;
+            border: none;
+            padding: 0.7rem 1.4rem;
+            font-size: 1rem;
+            font-weight: 600;
+            border-radius: 60px;
+            color: #c0392b;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            box-shadow: 0 3px 6px rgba(0,0,0,0.05);
+            font-family: inherit;
+            border: 1px solid #ffc5be;
+        }
+
+        .option-btn:hover {
+            background: #ffd0c9;
+            transform: scale(1.02);
+            border-color: #e67e6a;
+        }
+
+        .text-input {
+            margin: 15px 0;
+            padding: 12px 20px;
+            font-size: 1rem;
+            border-radius: 50px;
+            border: 2px solid #ffaaa5;
+            width: 90%;
+            font-family: inherit;
+            text-align: center;
+            background: white;
+        }
+
+        .next-btn {
+            background: #c0392b;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            border-radius: 40px;
+            margin-top: 20px;
+            cursor: pointer;
+            transition: 0.2s;
+            font-family: inherit;
+            width: 80%;
+            box-shadow: 0 5px 0 #6e2c21;
+            transform: translateY(-2px);
+        }
+
+        .next-btn:active {
+            transform: translateY(3px);
+            box-shadow: 0 2px 0 #6e2c21;
+        }
+
+        .feedback-msg {
+            margin-top: 15px;
+            font-size: 1rem;
+            font-weight: 500;
+            background: #fbe9e7;
+            display: inline-block;
+            padding: 6px 18px;
+            border-radius: 40px;
+            color: #b33a2a;
+        }
+
+        .final-gift {
+            margin-top: 1.8rem;
+            background: #ffe6e0;
+            border-radius: 50px;
+            padding: 1.2rem;
+            transition: all 0.4s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+        }
+
+        .gift-hidden {
+            display: none;
+        }
+
+        .gift-visible {
+            display: block;
+            animation: bouncePop 0.6s ease-out;
+        }
+
+        @keyframes bouncePop {
+            0% {
+                opacity: 0;
+                transform: scale(0.7);
+            }
+            70% {
+                transform: scale(1.05);
+            }
+            100% {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        .gift-text {
+            font-size: 1.6rem;
+            font-weight: bold;
+            color: #ac2e1c;
+            margin: 0.5rem 0;
+        }
+        
+        .look-behind {
+            font-size: 1.4rem;
+            font-weight: 600;
+            color: #e67e22;
+            background: #fff0e0;
+            display: inline-block;
+            padding: 10px 24px;
+            border-radius: 60px;
+            margin-top: 20px;
+            margin-bottom: 5px;
+            border: 2px dashed #ff9966;
+            animation: pulse 1.2s infinite;
+        }
+
+        .big-emoji {
+            font-size: 5rem;
+            display: inline-block;
+            animation: wiggle 0.8s infinite alternate;
+        }
+
+        @keyframes wiggle {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(12deg) scale(1.1); }
+        }
+
+        .heart-animation {
+            font-size: 2rem;
+            animation: pulse 0.5s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            100% { transform: scale(1.2); text-shadow: 0 0 5px red; }
+        }
+
+        @media (max-width: 500px) {
+            .card {
+                padding: 1.5rem;
+            }
+            .question {
+                font-size: 1.3rem;
+            }
+            h1 {
+                font-size: 1.6rem;
+            }
+            .look-behind {
+                font-size: 1.2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="heart-bg" id="heartContainer"></div>
+
+<div class="card">
+    <h1>С первой годовщиной, Любимка ❤️</h1>
+    <div class="sub">ответь на пару вопросов и получишь приз</div>
+
+    <div class="quiz-area" id="quizBlock">
+        <div class="question" id="questionText">Загрузка...</div>
+        <div class="options" id="optionsContainer"></div>
+        <div id="textInputContainer" style="display: none;">
+            <input type="text" id="freeAnswerInput" class="text-input" placeholder="Напиши здесь...">
+        </div>
+        <div>
+            <button class="next-btn" id="nextBtn">➡️ Дальше ⬅️</button>
+        </div>
+        <div id="feedbackMsg" class="feedback-msg"></div>
+    </div>
+
+    <div id="finalGift" class="final-gift gift-hidden">
+        <div class="big-emoji">🎁✨</div>
+        <div class="gift-text" id="giftMessage"></div>
+        <div class="look-behind" id="lookBehindText">🔍 Загляни за диван 🛋️</div>
+        <div class="heart-animation">❤️🧡💛</div>
+    </div>
+</div>
+
+<script>
+    // ВОПРОСЫ
+    const QUESTIONS = [
+        {
+            text: `Где произошел наш первый поцелуй? 💋`,
+            type: "choice",
+            options: ["возле 'вкусно - и точка'", "в Зеленограде в квартире", "перед моим отъездом в твой первый приезд", "в Питере"],
+            correct: 1
+        },
+        {
+            text: `Какой фильм мы смотрели вместе в первый раз? 🎬`,
+            type: "choice",
+            options: ["127 часов", "мальчишник в Вегасе", "Секс в большом городе"],
+            correct: 0
+        },
+        {
+            text: `Что ты подумал обо мне в нашу первую встречу? 💭`,
+            type: "text",
+            correct: null
+        }
+    ];
+
+    let currentQuestionIndex = 0;
+    let answersGiven = [false, false, false];
+    let userCorrect = [false, false, false];
+    let quizCompleted = false;
+    let freeAnswerValue = "";
+
+    const questionEl = document.getElementById("questionText");
+    const optionsContainer = document.getElementById("optionsContainer");
+    const textInputContainer = document.getElementById("textInputContainer");
+    const freeInput = document.getElementById("freeAnswerInput");
+    const nextBtn = document.getElementById("nextBtn");
+    const feedbackMsgDiv = document.getElementById("feedbackMsg");
+    const finalGiftDiv = document.getElementById("finalGift");
+    const giftMessageSpan = document.getElementById("giftMessage");
+
+    function renderCurrentQuestion() {
+        if (quizCompleted) return;
+        const qData = QUESTIONS[currentQuestionIndex];
+        if (!qData) return;
+
+        questionEl.innerText = qData.text;
+        
+        optionsContainer.style.display = "none";
+        textInputContainer.style.display = "none";
+        optionsContainer.innerHTML = "";
+        
+        if (qData.type === "choice") {
+            optionsContainer.style.display = "flex";
+            qData.options.forEach((opt, idx) => {
+                const btn = document.createElement("button");
+                btn.className = "option-btn";
+                btn.innerText = opt;
+                if (answersGiven[currentQuestionIndex]) {
+                    btn.disabled = true;
+                    if (idx === qData.correct) {
+                        btn.classList.add("correct-feedback");
+                    }
+                } else {
+                    btn.disabled = false;
+                }
+                btn.addEventListener("click", () => {
+                    if (answersGiven[currentQuestionIndex]) return;
+                    const isCorrect = (idx === qData.correct);
+                    if (isCorrect) {
+                        userCorrect[currentQuestionIndex] = true;
+                        feedbackMsgDiv.innerText = "✨ Верно! Ты меня знаешь ✨";
+                        createMiniConfetti();
+                    } else {
+                        userCorrect[currentQuestionIndex] = false;
+                        feedbackMsgDiv.innerText = `😅 Не угадал! Правильно: "${qData.options[qData.correct]}". Но всё равно люблю тебя! ❤️`;
+                    }
+                    answersGiven[currentQuestionIndex] = true;
+                    renderCurrentQuestion();
+                    checkAllAnswered();
+                });
+                optionsContainer.appendChild(btn);
+            });
+        } 
+        else if (qData.type === "text") {
+            textInputContainer.style.display = "block";
+            if (!answersGiven[currentQuestionIndex]) {
+                freeInput.value = "";
+                freeInput.disabled = false;
+            } else {
+                freeInput.disabled = true;
+                freeInput.value = freeAnswerValue;
+            }
+            if (!window.textListenerAttached) {
+                window.textListenerAttached = true;
+                freeInput.removeEventListener("blur", handleTextAnswer);
+                freeInput.addEventListener("blur", handleTextAnswer);
+            }
+        }
+        
+        if (answersGiven[currentQuestionIndex]) {
+            nextBtn.disabled = false;
+            nextBtn.style.opacity = "1";
+        } else {
+            nextBtn.disabled = true;
+            nextBtn.style.opacity = "0.6";
+        }
+    }
+    
+    function handleTextAnswer() {
+        if (answersGiven[currentQuestionIndex]) return;
+        const answerText = freeInput.value.trim();
+        if (answerText === "") {
+            feedbackMsgDiv.innerText = "💬 Напиши что-нибудь, мне правда интересно! 💬";
+            return;
+        }
+        freeAnswerValue = answerText;
+        userCorrect[currentQuestionIndex] = true;
+        answersGiven[currentQuestionIndex] = true;
+        feedbackMsgDiv.innerText = "❤️ Спасибо за честность! Твой ответ сохранён. ❤️";
+        createMiniConfetti();
+        renderCurrentQuestion();
+        checkAllAnswered();
+    }
+    
+    function checkAllAnswered() {
+        const allAnswered = answersGiven.every(val => val === true);
+        if (allAnswered && !quizCompleted) {
+            completeQuizAndShowGift();
+        }
+    }
+    
+    function nextQuestion() {
+        if (quizCompleted) return;
+        if (!answersGiven[currentQuestionIndex]) {
+            if (QUESTIONS[currentQuestionIndex].type === "text") {
+                feedbackMsgDiv.innerText = "Напиши ответ в поле выше!";
+            } else {
+                feedbackMsgDiv.innerText = "💬 Ответь на вопрос, чтобы продолжить 💬";
+            }
+            return;
+        }
+        if (currentQuestionIndex + 1 < QUESTIONS.length) {
+            currentQuestionIndex++;
+            feedbackMsgDiv.innerText = "";
+            renderCurrentQuestion();
+        } else {
+            if (!quizCompleted) completeQuizAndShowGift();
+        }
+    }
+    
+    function completeQuizAndShowGift() {
+        quizCompleted = true;
+        const quizBlock = document.getElementById("quizBlock");
+        quizBlock.style.opacity = "0.7";
+        quizBlock.style.pointerEvents = "none";
+        nextBtn.disabled = true;
+        
+        finalGiftDiv.classList.remove("gift-hidden");
+        finalGiftDiv.classList.add("gift-visible");
+        
+        // НОВЫЙ ТЕКСТ
+        giftMessageSpan.innerText = "Я рада, что ты появился в моей жизни! Спасибо, что делаешь меня счастливой! Люблю тебя!";
+        
+        for(let i = 0; i < 30; i++) {
+            setTimeout(() => createFloatingHeartExplosion(), i*60);
+        }
+    }
+    
+    function createMiniConfetti() {
+        for(let i=0;i<12;i++) {
+            let heart = document.createElement("div");
+            heart.innerHTML = "❤️";
+            heart.style.position = "fixed";
+            heart.style.left = Math.random() * window.innerWidth + "px";
+            heart.style.top = "70%";
+            heart.style.fontSize = (Math.random() * 20 + 14) + "px";
+            heart.style.pointerEvents = "none";
+            heart.style.zIndex = "999";
+            heart.style.opacity = "0.8";
+            heart.style.transition = "all 1s ease-out";
+            document.body.appendChild(heart);
+            setTimeout(() => {
+                heart.style.transform = `translateY(-${Math.random() * 300 + 100}px) translateX(${(Math.random() - 0.5)*80}px) rotate(20deg)`;
+                heart.style.opacity = "0";
+            }, 10);
+            setTimeout(() => heart.remove(), 1100);
+        }
+    }
+    
+    function createFloatingHeartExplosion() {
+        let heartEmoji = document.createElement("div");
+        heartEmoji.innerHTML = "💖";
+        heartEmoji.style.position = "fixed";
+        heartEmoji.style.left = "50%";
+        heartEmoji.style.top = "50%";
+        heartEmoji.style.fontSize = "40px";
+        heartEmoji.style.pointerEvents = "none";
+        heartEmoji.style.zIndex = "999";
+        heartEmoji.style.transform = "translate(-50%, -50%) scale(0)";
+        heartEmoji.style.transition = "all 0.8s cubic-bezier(0.2, 0.9, 0.4, 1.2)";
+        document.body.appendChild(heartEmoji);
+        setTimeout(() => {
+            heartEmoji.style.transform = `translate(${(Math.random() - 0.5)*300}px, ${-Math.random()*200 - 50}px) scale(1.2)`;
+            heartEmoji.style.opacity = "0";
+        }, 10);
+        setTimeout(() => heartEmoji.remove(), 800);
+    }
+    
+    function generateBackgroundHearts() {
+        const container = document.getElementById("heartContainer");
+        for(let i=0;i<35;i++) {
+            let heartSpan = document.createElement("div");
+            heartSpan.classList.add("floating-heart");
+            heartSpan.innerHTML = ["❤️","💖","💗","💓","💕","💘"][Math.floor(Math.random()*6)];
+            heartSpan.style.left = Math.random() * 100 + "%";
+            heartSpan.style.fontSize = (Math.random() * 28 + 12) + "px";
+            heartSpan.style.animationDuration = 8 + Math.random() * 14 + "s";
+            heartSpan.style.animationDelay = Math.random() * 15 + "s";
+            heartSpan.style.opacity = 0.2 + Math.random() * 0.3;
+            container.appendChild(heartSpan);
+        }
+    }
+    
+    generateBackgroundHearts();
+    renderCurrentQuestion();
+    nextBtn.addEventListener("click", nextQuestion);
+</script>
+</body>
+</html>
